@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="welcome bg-light h-100">
+    <div class="container">
+        <div class="row justify-content-md-center text-center">
+            <div class="jumbotron jumbotron-fluid bg-light ">
+                <div class="container">
+                <h1 class="display-4"> Welcome aboard. Thanks for joining us</h1>
+                <p class="lead">You are now a supplier. It helps you add and sell your products to our clients. </p>
+                </div>
+            </div>
+        </div>    
+        <div class="row justify-content-md-center">
+            <div class="col-sm-6">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h5 class="card-title">Let's add your products</h5>
+                  <p class="card-text">You can add products of any category with ease.</p>
+                  <button class="addprod btn btn-warning">Add Product</button>
+                  
+                </div>
+              </div>
+            </div>  
+        </div>    
+    </div>
+</div>
+
+
+<div class="main" style="display: none;">
+    <div class='container'>
+        <div class='row justify-content-center'>
+            <div class='col-md-7 p-md-5'>
+                <h3>Add your products details</h3>
+                    <p class="lead">These products will be reflected in our product listing page</p>
+                        <div class='prodform p-md-5'>
+                            <form action="success" enctype="multipart/form-data" method="POST">
+                                {% csrf_token %}
+                            
+                                {{ form|crispy }}
+
+                   
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-warning btn-block">Add</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block scripting %}
+<script>
+    $(document).ready(function(){
+        $(".addprod").click(function(){
+          $(".welcome").fadeOut();
+          $(".main").fadeIn();
+        });
+      });
+</script>
+      
+{% endblock scripting %}
+

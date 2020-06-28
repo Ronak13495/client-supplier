@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="left-sidebar">
+    <div class="sidebar-top">
+       <h3 class="text-warning text-center">Dashboard</h3> 
+    </div>
+    <div class="list-group text-center">
+        <a href="#" class="list-group-item list-group-item-action bg-dark text-warning orders">Orders</a>
+        <a href="#" class="list-group-item list-group-item-action bg-dark text-warning profile">Edit Profile</a>
+        <a href="#" class="list-group-item list-group-item-action bg-dark text-warning delete">Delete Account</a>
+    </div> 
+</div>
+
+<div class='right-section'>
+    <div class="container">
+        <div class="row">
+            <div class='offset-md-5 col-md-9'  id='firstDiv'>
+                <h3 class='float-left  mr-5'>Your Orders</h3>
+                <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Sort by
+                    </a>
+                  
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Date</a>
+                      <a class="dropdown-item" href="#">Product Category</a>
+                      
+                    </div>
+                  </div>
+                <br>
+
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Date</th>
+                        {% if request.user.is_supplier %}
+                        <th scope="col">Client Name</th>
+                        {% else %}
+                        <th scope="col">Supplier Name</th>
+                        {% endif %}
+                        <th scope="col">Product</th>
+                        <th scope="col">Product Category</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">12/6/2020</th>
+                        {% if request.user.is_supplier %}
+                        <td>testclient</td>
+                        {% else %}
+                        <td>testsupplier</td>
+                        {% endif %}
+                        <td>Monopoly Game</td>
+                        <td>Toys & Games</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class='offset-md-5 col-md-7' id='secondDiv' style="display: none;">
+                <h3>Your Account Details</h3>
+                <p>Email:      {{user.email}}</p><br><br>
+                
+                <h3 class=''>Edit Profile Details</h3><br>
+                <form action="dashboard" method="POST">
+                    {% csrf_token %}
+                            
+                    {{ form|crispy }}
+                    <div class="form-group row">
+                      <div class="col-sm-10">
+                        <button type="submit" class="btn btn-warning">Save Changes</button>
+                      </div>
+                    </div>
+                </form>
+            </div>
+            
+
+            <div class='offset-md-5 col-md-7' id='thirdDiv' style="display: none;">
+                <h3>Delete Account</h3>
+                <p>Are you sure you want to delete your account permanently?</p>
+
+                <a href="delete" class="btn btn-danger">Yes, delete account</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock content %}
+
+{% block scripting %}
+<script>
+    $(document).ready(function(){
+        $(".profile").click(function(){
+          $("#firstDiv").fadeOut();
+          $("#thirdDiv").fadeOut();
+          $("#secondDiv").fadeIn("slow");
+        });
+      });
+
+      $(document).ready(function(){
+        $(".orders").click(function(){
+          $("#secondDiv").fadeOut();
+          $("#thirdDiv").fadeOut();
+          $("#firstDiv").fadeIn("slow");
+        });
+      });
+      $(document).ready(function(){
+        $(".delete").click(function(){
+          $("#secondDiv").fadeOut();
+          $("#firstDiv").fadeOut();
+          $("#thirdDiv").fadeIn("slow");
+        });
+      });
+</script>
+      
+{% endblock scripting %}
+

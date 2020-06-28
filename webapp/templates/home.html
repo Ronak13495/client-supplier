@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %} 
+
+<div class='bg-white h-100'>
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center text-center">
+            <div class='col-md-7'>
+                <img alt="Logo"  src="{% static 'images/logo.png' %}" class="img-thumbnail border-0">
+                <div class="jumbotron bg-white" >
+                    
+                    <p class="lead">Explore thousands of products and buy them easily on your convenience.</p>
+                    <hr class="my-4">
+                    <p>Receive or order goods with an exceptional customer service.</p>
+                    <a class="btn btn-warning btn-lg btn-block" href="{% url 'account_signup' %}" role="button">Join us now</a>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>    
+
+
+{% endblock content %}

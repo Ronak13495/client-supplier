@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block content %} 
+
+{% if message %}
+<div class='container'>
+    <div class="row h-100 justify-content-center">
+        <h3>Your profile has been updated successfully.</h3>
+        <a class="btn btn-warning mr-md-2" href="dashboard">Back to dashboard</a>
+    </div>    
+</div>
+    
+{% else %}    
+
+    <div class='container'>
+        <div class="row h-100 justify-content-center">
+            <h3>Product added successfully.</h3>
+            <a class="btn btn-warning mr-md-2" href="welcome">Add More</a>
+        </div>
+        
+    </div>
+{% endif%}
+
+{% endblock content %}
